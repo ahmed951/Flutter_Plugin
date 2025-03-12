@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:urwaypayment/urwaypayment.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -19,15 +18,13 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> makePayment() async {
-
     // To store payment data
     dynamic lastResult;
 
-
     try {
-
       // initiate payment
-      lastResult = await Payment.makepaymentService(context: context,
+      lastResult = await Payment.makepaymentService(
+          context: context,
           country: "SA",
           action: "1",
           currency: "SAR",
@@ -47,9 +44,7 @@ class _MyAppState extends State<MyApp> {
           zipCode: "",
           tokenOperation: "A/U/D");
 
-
       print('Result in Main is $lastResult');
-      
     } on PlatformException {
       print('Failed payment');
     }
@@ -67,10 +62,10 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('Waiting for Response.'),
-            RaisedButton(
+            /* RaisedButton(
               child: Text('Call payment'),
               onPressed: () => makePayment(),
-            )
+            ) */
           ],
         )),
       ),
