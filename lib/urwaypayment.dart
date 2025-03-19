@@ -184,6 +184,7 @@ class Payment {
         var bytes = utf8.encode(pipeSeperatedString);
         Digest sha256Result = sha256.convert(bytes);
         final digestHex = hex.encode(sha256Result.bytes);
+        print("digestHex $digestHex ");
 
         PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
