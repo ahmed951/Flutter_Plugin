@@ -623,7 +623,9 @@ class Payment {
                   amount: dblamt,
                   shippingcharge: dblshippingcharge)
             ];
-            print('error caught: $merchantIdentifier');
+            print("paymentItems1 $paymentItems1 ");
+
+            //print('error caught: $merchantIdentifier');
             // initiate payment
             applePaymentData = await ApplePayFlutter.makePayment(
               countryCode: country,
@@ -640,6 +642,7 @@ class Payment {
               customerName: "Demo User",
               companyName: companyName,
             );
+            print("applePaymentData $applePaymentData ");
           }
         } on PlatformException catch (e) {
           print('error caught: $e');
@@ -647,10 +650,12 @@ class Payment {
         }
         var totalcharge = double.parse(amt) + double.parse(shippingCharge);
         String strtlchr = totalcharge.toString();
-
+        print("111");
         if (applePaymentData.toString().contains("code")) {
+          print("222");
           return "";
         } else {
+          print("333");
           var order = await applepayapi(
             context,
             country,
@@ -667,11 +672,13 @@ class Payment {
             tokenizationType,
             applePaymentData,
           );
+          print("4444 $order");
           appleRespdata = order;
+          print("5555 $appleRespdata");
         }
       }
     } on SocketException catch (e) {
-      print('error caught: $e');
+      print('error caught->> $e');
 
       ResponseConfig.startTrxn = false;
       //appleRespdata = "Please check internet connection";
