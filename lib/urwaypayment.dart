@@ -1,6 +1,7 @@
 library urwaypayment;
 
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:core';
 import 'package:apple_pay_flutter/apple_pay_flutter.dart';
@@ -623,7 +624,7 @@ class Payment {
                   amount: dblamt,
                   shippingcharge: dblshippingcharge)
             ];
-            print("paymentItems1 $paymentItems1 ");
+            log("paymentItems1 ${paymentItems1.toString()} ");
 
             //print('error caught: $merchantIdentifier');
             // initiate payment
@@ -653,6 +654,7 @@ class Payment {
         print("111");
         if (applePaymentData.toString().contains("code")) {
           print("222");
+          showalertDailog(context, 'Error', applePaymentData.toString());
           return "";
         } else {
           print("333");
