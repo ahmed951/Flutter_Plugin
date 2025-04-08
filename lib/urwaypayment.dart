@@ -648,6 +648,7 @@ class Payment {
         } on PlatformException catch (e) {
           print('error caught: $e');
           print('Failed payment');
+          showalertDailog(context, 'Error', "$e");
         }
         var totalcharge = double.parse(amt) + double.parse(shippingCharge);
         String strtlchr = totalcharge.toString();
@@ -657,6 +658,8 @@ class Payment {
           showalertDailog(context, 'Error', applePaymentData.toString());
           return "";
         } else {
+          showalertDailog(context, 'Info', "Enters apple pay block");
+
           print("333");
           var order = await applepayapi(
             context,
@@ -675,6 +678,8 @@ class Payment {
             applePaymentData,
           );
           print("4444 $order");
+          showalertDailog(context, 'Info', "Pass apple pay block");
+
           appleRespdata = order;
           print("5555 $appleRespdata");
         }
@@ -762,8 +767,10 @@ class Payment {
     if (isValidationSucess(context, amt, customerEmail, action, country,
         currency, trackid, "", "")) {
       if (["", null].contains(appleToken['paymentData'])) {
+        showalertDailog(context, 'Info', "1");
       } else {
         paymentTokk = jsonDecode(appleToken['paymentData']) ?? "empty";
+        showalertDailog(context, 'Info', "2");
       }
 
       pipeSeperatedString = trackid +
@@ -781,7 +788,7 @@ class Payment {
       var bytes = utf8.encode(pipeSeperatedString);
       Digest sha256Result = sha256.convert(bytes);
       final digestHex = hex.encode(sha256Result.bytes);
-
+      showalertDailog(context, 'Info', "$digestHex");
       try {
         var jsonBody = jsonEncode({
           'instrumentType': 'DEFAULT',
@@ -814,15 +821,18 @@ class Payment {
           },
           body: jsonBody,
         );
+        showalertDailog(context, 'Info', "$appleresponse");
 
         //  _writetoFile("Request apple pay :" + jsonBody + "\n");
         if (appleresponse.statusCode == 200) {
+          showalertDailog(context, 'Info', "First time : Status Code 200");
           //  _writetoFile("Response apple pay  1:" + response.body.toString() + "\n");
           var data = json.decode(appleresponse.body);
           var payId = data["tranid"] as String;
           var respCode = data["responseCode"] as String;
 
           if (respCode == '000') {
+            showalertDailog(context, 'Info', "resp code = 000");
             var jsonBody = jsonEncode({
               'transid': payId,
               'trackid': trackid,
@@ -855,6 +865,8 @@ class Payment {
             );
 
             if (responseenq.statusCode == 200) {
+              showalertDailog(context, 'Info', "Second time : Status Code 200");
+
               var data = json.decode(appleresponse.body);
               var resp1 = json.encode(data);
               ResponseConfig.startTrxn = false;
@@ -874,6 +886,7 @@ class Payment {
               showalertDailog(context, '$apiresult', '$ErrorMsg');
             }
           } else {
+            showalertDailog(context, 'Error', "Resp code != 000");
             // var data = json.decode(response.body);
             var data = json.decode(appleresponse.body);
             var resp1 = json.encode(data);
@@ -889,6 +902,7 @@ class Payment {
       }
     } else {
       ResponseConfig.startTrxn = false;
+      showalertDailog(context, 'Error', "Not valid");
     }
 
     return RespData;
