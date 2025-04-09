@@ -1,7 +1,6 @@
 library urwaypayment;
 
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'dart:core';
 import 'package:apple_pay_flutter/apple_pay_flutter.dart';
@@ -624,7 +623,7 @@ class Payment {
                   amount: dblamt,
                   shippingcharge: dblshippingcharge)
             ];
-            log("paymentItems1 ${paymentItems1.toString()} ");
+            print("paymentItems1 ${paymentItems1.toString()} ");
 
             //print('error caught: $merchantIdentifier');
             // initiate payment
