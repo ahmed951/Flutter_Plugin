@@ -33,27 +33,27 @@ class Payment {
   /// This method is used to perform Transactions
   /// This method takes Transaction Details as @params****
 
-  static Future<String> makepaymentService({
-    required BuildContext context,
-    required String country,
-    required String action,
-    required String currency,
-    required String amt,
-    required String customerEmail,
-    required String trackid,
-    required String udf1,
-    required String udf2,
-    required String udf3,
-    required String udf4,
-    required String udf5,
-    required String address,
-    required String city,
-    required String zipCode,
-    required String state,
-    required String cardToken,
-    required String tokenizationType,
-    required String tokenOperation,
-  }) async {
+  static Future<String> makepaymentService(
+      {required BuildContext context,
+      required String country,
+      required String action,
+      required String currency,
+      required String amt,
+      required String customerEmail,
+      required String trackid,
+      required String udf1,
+      required String udf2,
+      required String udf3,
+      required String udf4,
+      required String udf5,
+      required String address,
+      required String city,
+      required String zipCode,
+      required String state,
+      required String cardToken,
+      required String tokenizationType,
+      required String tokenOperation,
+      required metadata}) async {
     String payRespData = "";
 
     /**
@@ -87,7 +87,8 @@ class Payment {
               state,
               cardToken,
               tokenizationType,
-              tokenOperation);
+              tokenOperation,
+              metadata);
           payRespData = order;
         } else {
           ResponseConfig.startTrxn = false;
@@ -111,26 +112,26 @@ class Payment {
   ///  Api calling for First leg
   ///
   static Future<String> _read(
-    BuildContext context,
-    String country,
-    String action,
-    String currency,
-    String amt,
-    String customerEmail,
-    String trackid,
-    String udf1,
-    String udf2,
-    String udf3,
-    String udf4,
-    String udf5,
-    String address,
-    String city,
-    String zipCode,
-    String state,
-    String cardToken,
-    String tokenizationType,
-    String tokenOperation,
-  ) async {
+      BuildContext context,
+      String country,
+      String action,
+      String currency,
+      String amt,
+      String customerEmail,
+      String trackid,
+      String udf1,
+      String udf2,
+      String udf3,
+      String udf4,
+      String udf5,
+      String address,
+      String city,
+      String zipCode,
+      String state,
+      String cardToken,
+      String tokenizationType,
+      String tokenOperation,
+      String metadata) async {
     String text;
     String url = "";
     String readRespData = "";
@@ -255,6 +256,7 @@ class Payment {
             tokenOperation: '',
             udf7: '',
             deviceinfo: devicebody,
+            metadata: metadata,
           );
           body = json.encode(payment.toMap());
         } else if (action == '12') //tokenization
@@ -280,6 +282,7 @@ class Payment {
             tokenOperation: tokenOperation,
             udf7: '',
             deviceinfo: devicebody,
+            metadata: metadata,
           );
           body = json.encode(payTokenize.toMap());
         } else if (action == '14') {
@@ -304,6 +307,7 @@ class Payment {
             requestHash: digestHex,
             udf7: '',
             deviceinfo: devicebody,
+            metadata: metadata,
           );
           body = json.encode(payRefundReq.toMap());
         } else if (action == "13") {
@@ -326,6 +330,7 @@ class Payment {
             requestHash: digestHex,
             udf7: '',
             deviceinfo: devicebody,
+            metadata: metadata,
           );
 
           body = json.encode(paySTC.toMap());
@@ -597,6 +602,7 @@ class Payment {
     required String merchantIdentifier,
     required String shippingCharge,
     required String companyName,
+    required String metadata,
   }) async {
     dynamic applePaymentData;
     String appleRespdata = "";
@@ -675,6 +681,7 @@ class Payment {
             udf5,
             tokenizationType,
             applePaymentData,
+            metadata,
           );
           print("4444 $order");
           showalertDailog(context, 'Info', "Pass apple pay block");
@@ -697,21 +704,21 @@ class Payment {
 
   ///  This method is use to perform Apple Pay transaction in merchant PG
   static Future<String> applepayapi(
-    BuildContext context,
-    String country,
-    String action,
-    String currency,
-    String amt,
-    String customerEmail,
-    String trackid,
-    String udf1,
-    String udf2,
-    String udf3,
-    String udf4,
-    String udf5,
-    String tokenizationType,
-    dynamic appleToken,
-  ) async {
+      BuildContext context,
+      String country,
+      String action,
+      String currency,
+      String amt,
+      String customerEmail,
+      String trackid,
+      String udf1,
+      String udf2,
+      String udf3,
+      String udf4,
+      String udf5,
+      String tokenizationType,
+      dynamic appleToken,
+      String metadata) async {
     String text;
     String RespData = "";
 
@@ -810,7 +817,8 @@ class Payment {
           }).replaceAll('\\', ''),
           'applePayId': 'applepay',
           'requestHash':
-              sha256.convert(utf8.encode(pipeSeperatedString)).toString()
+              sha256.convert(utf8.encode(pipeSeperatedString)).toString(),
+          'metadata': metadata,
         });
         var requrl = Uri.parse(Constantvals.requrl);
         final appleresponse = await http.post(
@@ -852,7 +860,8 @@ class Payment {
               "udf5": "",
               "udf2": "",
               'requestHash':
-                  sha256.convert(utf8.encode(pipeSeperatedString)).toString()
+                  sha256.convert(utf8.encode(pipeSeperatedString)).toString(),
+              'metadata': metadata,
             });
             var requrl = Uri.parse(Constantvals.requrl);
             final responseenq = await http.post(
