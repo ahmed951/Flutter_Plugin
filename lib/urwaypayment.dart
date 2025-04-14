@@ -773,10 +773,10 @@ class Payment {
     if (isValidationSucess(context, amt, customerEmail, action, country,
         currency, trackid, "", "")) {
       if (["", null].contains(appleToken['paymentData'])) {
-        showalertDailog(context, 'Info', "1");
+        // showalertDailog(context, 'Info', "1");
       } else {
         paymentTokk = jsonDecode(appleToken['paymentData']) ?? "empty";
-        showalertDailog(context, 'Info', "2");
+        //showalertDailog(context, 'Info', "2");
       }
 
       pipeSeperatedString = trackid +
@@ -839,7 +839,7 @@ class Payment {
           var respCode = data["responseCode"] as String;
 
           if (respCode == '000') {
-            showalertDailog(context, 'Info', "resp code = 000");
+            //showalertDailog(context, 'Info', "resp code = 000");
             var jsonBody = jsonEncode({
               'transid': payId,
               'trackid': trackid,
@@ -891,7 +891,7 @@ class Payment {
               }
               var apiresult = data["result"] as String;
 
-              showalertDailog(context, '$apiresult', '$ErrorMsg');
+              //showalertDailog(context, '$apiresult', '$ErrorMsg');
             }
           } else {
             //showalertDailog(context, 'Error', "Resp code != 000");
