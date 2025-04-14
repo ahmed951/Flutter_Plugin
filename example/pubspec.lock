@@ -4,10 +4,11 @@ packages:
   apple_pay_flutter:
     dependency: transitive
     description:
-      name: apple_pay_flutter
-      sha256: "5f47de3a2835edfc8d6975aa5e6ab5b2aff4d3b30475894327a62ff007c449ac"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: "8b95e0e6fe260567b03b6cb70cbfc00656bcd48f"
+      resolved-ref: "8b95e0e6fe260567b03b6cb70cbfc00656bcd48f"
+      url: "https://github.com/ahmed951/apple_pay_flutter"
+    source: git
     version: "0.0.8"
   args:
     dependency: transitive

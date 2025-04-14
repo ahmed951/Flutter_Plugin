@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "apple_pay_flutter",
-      "rootUri": "file:///C:/Users/aashaker/AppData/Local/Pub/Cache/hosted/pub.dev/apple_pay_flutter-0.0.8",
+      "rootUri": "file:///C:/Users/aashaker/AppData/Local/Pub/Cache/git/apple_pay_flutter-8b95e0e6fe260567b03b6cb70cbfc00656bcd48f/",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -452,7 +452,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2025-03-17T13:34:58.834574Z",
+  "generated": "2025-04-14T12:54:29.013480Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

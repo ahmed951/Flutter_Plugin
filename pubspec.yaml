@@ -20,7 +20,11 @@ dependencies:
   connectivity_macos: ^0.2.1+2
   device_info_plus: ^4.1.2
   dart_ipify: ^1.1.1
-  apple_pay_flutter: ^0.0.8
+  apple_pay_flutter: 
+    git:
+      url: https://github.com/ahmed951/apple_pay_flutter
+      ref: 8b95e0e6fe260567b03b6cb70cbfc00656bcd48f
+
   package_info_plus: ^1.4.3+1
   webview_flutter: 4.0.6
 
